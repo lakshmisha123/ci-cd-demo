@@ -1,0 +1,15 @@
+name: demo4
+on: [workflow_dispatch]
+
+jobs:
+  check-app-CI:
+    runs-on:  ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+            node-version: 20
+      - run: npm install
+      - run: npm start &
+      - run: sleep 5
+      - run: curl -I http://localhost:3000 || exit 1
